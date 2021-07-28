@@ -2,6 +2,8 @@ package com.inst.money.openapi.dto;
 
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.TreeMap;
+
 public class PaymentReq {
 
     private String currency;
@@ -11,6 +13,8 @@ public class PaymentReq {
     private String cust_order_id;
 
     private ReturnUrls return_urls;
+
+    private Customer customer;
 
 
     public String getCurrency() {
@@ -44,6 +48,15 @@ public class PaymentReq {
 
     public void setReturn_urls(ReturnUrls return_urls) {
         this.return_urls = return_urls;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @Override

@@ -65,7 +65,8 @@ public class HttpUtil {
         String SIGN_SEPARATOR = ":";
         String method = "POST";
         String timeStampStr = String.valueOf(System.currentTimeMillis());
-        TreeMap<String,String> map = JSONObject.parseObject(reqString,TreeMap.class);
+        TreeMap<String,Object> map = JSONObject.parseObject(reqString,TreeMap.class);
+        System.out.println(map);
 
         String sign = HmacSHA256Base64Util.sign(timeStampStr, method, requestPath,  requestQueryStr, apiKey, apiSecret, map);
 
@@ -104,7 +105,7 @@ public class HttpUtil {
         String SIGN_SEPARATOR = ":";
         String method = "PUT";
         String timeStampStr = String.valueOf(System.currentTimeMillis());
-        TreeMap<String,String> map = JSONObject.parseObject(reqString,TreeMap.class);
+        TreeMap<String,Object> map = JSONObject.parseObject(reqString,TreeMap.class);
 
         String sign = HmacSHA256Base64Util.sign(timeStampStr, method, requestPath,  requestQueryStr, apiKey, apiSecret, map);
 

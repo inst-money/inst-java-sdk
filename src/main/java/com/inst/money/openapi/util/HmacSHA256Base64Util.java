@@ -2,6 +2,7 @@ package com.inst.money.openapi.util;
 
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.inst.money.openapi.enums.CharsetEnum;
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -19,7 +21,7 @@ public class HmacSHA256Base64Util {
 
 
     public static String sign(String timestamp, String method, String requestPath,
-                              String queryString, String appKey, String secretKey, TreeMap<String, String> body)  throws Exception {
+                              String queryString, String appKey, String secretKey, TreeMap<String, Object> body)  throws Exception {
         if (StringUtils.isEmpty(secretKey) || StringUtils.isEmpty(method)) {
             throw new Exception("secretKey error");
         }
@@ -33,7 +35,7 @@ public class HmacSHA256Base64Util {
     }
 
 
-    public static String preHash(String timestamp, String method, String requestPath, String queryString, String appKey, TreeMap<String, String> body) throws UnsupportedEncodingException {
+    public static String preHash(String timestamp, String method, String requestPath, String queryString, String appKey, TreeMap<String, Object> body) throws UnsupportedEncodingException {
         StringBuilder preHash = new StringBuilder();
         preHash.append(timestamp);
         preHash.append(method.toUpperCase());
@@ -48,11 +50,24 @@ public class HmacSHA256Base64Util {
         return preHash.toString();
     }
 
-    public static String appendBody(TreeMap<String, String> params) {
+    public static TreeMap<String, Object> convertMap(Map<String, Object> map) {
+        for (String key : map.keySet()) {
+            Object obj = map.get(key);
+            if (obj instanceof Map) {
+                map.put(key, convertMap((Map) obj));
+            }
+        }
+        return new TreeMap(map);
+    }
+    public static String appendBody(TreeMap<String, Object> params) {
         StringBuilder str = new StringBuilder("");
         Set<String> setKey = params.keySet();
         for (String key : setKey) {
-            str.append(key).append("=").append(String.valueOf(params.get(key))).append("&");
+            Object obj = params.get(key);
+            if(params.get(key) instanceof Map){
+                obj = convertMap((Map)obj);
+            }
+            str.append(key).append("=").append(String.valueOf(obj)).append("&");
         }
         String strBody = str.toString();
         if(!StringUtils.isEmpty(strBody)){

@@ -1,6 +1,7 @@
 package com.inst.money.openapi;
 
 
+import com.inst.money.openapi.dto.Customer;
 import com.inst.money.openapi.dto.OrderReq;
 import com.inst.money.openapi.dto.PaymentReq;
 import com.inst.money.openapi.dto.ReturnUrls;
@@ -10,6 +11,7 @@ import com.inst.money.openapi.util.HttpUtil;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.TreeMap;
 import java.util.UUID;
 
 /**
@@ -66,6 +68,11 @@ public class FiatOrderTest {
         returnUrls.setSuccess_url("https://sandbox.inst.money/success.html");
         returnUrls.setStatus_url("https://sandbox.inst.money/status.html");
         req.setReturn_urls(returnUrls);
+        Customer customer = new Customer();
+        customer.setEmail("hello@inst.money");
+        customer.setName("Jack");
+
+        req.setCustomer(customer);
         HttpUtil.post(requestPath,requestQueryStr,req.toString());
     }
 

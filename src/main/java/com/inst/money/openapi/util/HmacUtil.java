@@ -10,6 +10,7 @@ import javax.management.RuntimeErrorException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -50,12 +51,24 @@ public class HmacUtil {
         }
         return preHash.toString();
     }
-
+    public static TreeMap<String, Object> convertMap(Map<String, Object> map) {
+        for (String key : map.keySet()) {
+            Object obj = map.get(key);
+            if (obj instanceof Map) {
+                map.put(key, convertMap((Map) obj));
+            }
+        }
+        return new TreeMap(map);
+    }
     public static String appendBody(TreeMap<String, Object> params) {
         StringBuilder str = new StringBuilder("");
         Set<String> setKey = params.keySet();
         for (String key : setKey) {
-            str.append(key).append("=").append(String.valueOf(params.get(key))).append("&");
+            Object obj = params.get(key);
+            if(params.get(key) instanceof Map){
+                obj = convertMap((Map)obj);
+            }
+            str.append(key).append("=").append(String.valueOf(obj)).append("&");
         }
         String strBody = str.toString();
         if (!StringUtils.isEmpty(strBody)) {
