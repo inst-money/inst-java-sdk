@@ -2,6 +2,8 @@ package com.inst.money.openapi;
 
 
 import com.inst.money.openapi.dto.OrderReq;
+import com.inst.money.openapi.dto.PaymentReq;
+import com.inst.money.openapi.dto.ReturnUrls;
 import com.inst.money.openapi.util.HttpUtil;
 
 
@@ -49,11 +51,28 @@ public class FiatOrderTest {
 //        req.setCust_order_id("1234560018");
         HttpUtil.post(requestPath,requestQueryStr,req.toString());
     }
+    @Test
+    public void postOrderReq2Test() throws Exception {
+
+        String requestPath = "/api/v1/payment";
+        String requestQueryStr = "";
+
+        PaymentReq req = new PaymentReq();
+        req.setCurrency("USD");
+        req.setAmount("7.20");
+        req.setCust_order_id(UUID.randomUUID().toString());
+        ReturnUrls returnUrls = new ReturnUrls();
+        returnUrls.setFail_url("http://sandbox.inst.money/fail.html");
+        returnUrls.setSuccess_url("https://sandbox.inst.money/success.html");
+        returnUrls.setStatus_url("https://sandbox.inst.money/status.html");
+        req.setReturn_urls(returnUrls);
+        HttpUtil.post(requestPath,requestQueryStr,req.toString());
+    }
 
     @Test
     public void getRatesTest() throws Exception {
         String requestPath = "/api/v1/rates";
-        String requestQueryStr = "from_currency=USD&to_coin=BTC";
+        String requestQueryStr = "from_currency=USD&to_coin=ETH";
         HttpUtil.get(requestPath,requestQueryStr);
     }
 
@@ -75,6 +94,16 @@ public class FiatOrderTest {
         String requestPath = "/api/v1/orders";
         String requestQueryStr = "cust_order_id=1ec7b32b-0750-4308-b882-f00d45b4f712";
         HttpUtil.get(requestPath,requestQueryStr);
+    }
+    @Test
+    public void queryOrderTest() throws Exception {
+
+        String requestPath = "/api/v1/checkout";
+        String requestQueryStr = "id=20210722083735119900000205";
+
+        System.out.println("------ queryOrderTest start");
+        HttpUtil.get(requestPath, requestQueryStr);
+        System.out.println("------ queryOrderTest end");
     }
 
 }

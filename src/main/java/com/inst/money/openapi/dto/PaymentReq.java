@@ -2,7 +2,7 @@ package com.inst.money.openapi.dto;
 
 import com.alibaba.fastjson.JSONObject;
 
-public class OrderReq {
+public class PaymentReq {
 
     private String currency;
 
@@ -10,6 +10,7 @@ public class OrderReq {
 
     private String cust_order_id;
 
+    private ReturnUrls return_urls;
 
 
     public String getCurrency() {
@@ -34,6 +35,15 @@ public class OrderReq {
 
     public void setCust_order_id(String cust_order_id) {
         this.cust_order_id = cust_order_id;
+    }
+
+    public ReturnUrls getReturn_urls() {
+        return return_urls;
+    }
+
+
+    public void setReturn_urls(ReturnUrls return_urls) {
+        this.return_urls = return_urls;
     }
 
     @Override
