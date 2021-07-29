@@ -91,14 +91,14 @@ public class HttpUtil {
                 .addHeader("Authorization",authorizationStr)
                 .addHeader("Access-Passphrase",apiPassphrase)
                 .build();
-//        Response response = client.newCall(request).execute();
-//        //System.out.println("result="+response.isSuccessful());
-//        System.out.println();
-//        if (response.isSuccessful()) {
-//            System.out.println(response.body().string());
-//        }else{
-//            System.out.println("error... " + response.body().string());
-//        }
+        Response response = client.newCall(request).execute();
+        //System.out.println("result="+response.isSuccessful());
+        System.out.println();
+        if (response.isSuccessful()) {
+            System.out.println(response.body().string());
+        }else{
+            System.out.println("error... " + response.body().string());
+        }
     }
 
     public static void  put(String requestPath,String requestQueryStr,String reqString) throws Exception{
