@@ -54,7 +54,7 @@ public class FiatOrderTest {
         HttpUtil.post(requestPath,requestQueryStr,req.toString());
     }
     @Test
-    public void postOrderReq2Test() throws Exception {
+    public void postPaymentTest() throws Exception {
 
         String requestPath = "/api/v1/payment";
         String requestQueryStr = "";

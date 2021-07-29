@@ -66,6 +66,7 @@ public class HmacSHA256Base64Util {
             Object obj = params.get(key);
             if(params.get(key) instanceof Map){
                 obj = convertMap((Map)obj);
+                obj = JSONObject.toJSONString(obj);
             }
             str.append(key).append("=").append(String.valueOf(obj)).append("&");
         }
