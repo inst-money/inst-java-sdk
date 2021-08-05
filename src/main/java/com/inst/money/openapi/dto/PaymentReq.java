@@ -12,7 +12,7 @@ public class PaymentReq {
 
     private String cust_order_id;
 
-    private ReturnUrls return_urls;
+    private String return_url;
 
     private Customer customer;
 
@@ -37,17 +37,17 @@ public class PaymentReq {
     }
 
 
-    public void setCust_order_id(String cust_order_id) {
+    public void setCust_order_id(String cust_orgder_id) {
         this.cust_order_id = cust_order_id;
     }
 
-    public ReturnUrls getReturn_urls() {
-        return return_urls;
+    public  String getReturn_url() {
+        return return_url;
     }
 
 
-    public void setReturn_urls(ReturnUrls return_urls) {
-        this.return_urls = return_urls;
+    public void setReturn_url(String return_url) {
+        this.return_url = return_url;
     }
 
     public Customer getCustomer() {

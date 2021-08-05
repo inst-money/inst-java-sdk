@@ -6,10 +6,7 @@ import org.junit.Test;
 
 import java.util.TreeMap;
 
-/**
- * @author 
- * @date 6/27/21
- */
+
 public class NotificationTest {
     @Test
     public void notificationTest() {

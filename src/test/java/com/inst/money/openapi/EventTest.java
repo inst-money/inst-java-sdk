@@ -10,11 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @author zhouq
- * @version 1.0
- * @date 2019/12/11
- */
+
 public class EventTest {
 
     String host = "https://api.sandbox.inst.money";

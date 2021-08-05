@@ -2,9 +2,7 @@ package com.inst.money.openapi;
 
 
 import com.inst.money.openapi.dto.Customer;
-import com.inst.money.openapi.dto.OrderReq;
 import com.inst.money.openapi.dto.PaymentReq;
-import com.inst.money.openapi.dto.ReturnUrls;
 import com.inst.money.openapi.util.HttpUtil;
 
 
@@ -14,11 +12,7 @@ import org.junit.Test;
 import java.util.TreeMap;
 import java.util.UUID;
 
-/**
- * @author
- * @version 1.0
- * @date 2021/07/11
- */
+
 public class FiatOrderTest {
 
 
@@ -35,24 +29,14 @@ public class FiatOrderTest {
 
 
 
+
+
     @Before
     public void setUp() throws Exception {
         HttpUtil.init(host,apiKey,apiSecret,apiPassphrase);
     }
 
-    @Test
-    public void postOrderReqTest() throws Exception {
 
-        String requestPath = "/api/v1/order";
-        String requestQueryStr = "";
-
-        OrderReq req = new OrderReq();
-        req.setCurrency("EUR");
-        req.setAmount("7.20");
-        req.setCust_order_id(UUID.randomUUID().toString());
-//        req.setCust_order_id("1234560018");
-        HttpUtil.post(requestPath,requestQueryStr,req.toString());
-    }
     @Test
     public void postPaymentTest() throws Exception {
 
@@ -61,13 +45,9 @@ public class FiatOrderTest {
 
         PaymentReq req = new PaymentReq();
         req.setCurrency("USD");
-        req.setAmount("7.20");
+        req.setAmount("1.3");
         req.setCust_order_id(UUID.randomUUID().toString());
-        ReturnUrls returnUrls = new ReturnUrls();
-        returnUrls.setFail_url("http://sandbox.inst.money/fail.html");
-        returnUrls.setSuccess_url("https://sandbox.inst.money/success.html");
-        returnUrls.setStatus_url("https://sandbox.inst.money/status.html");
-        req.setReturn_urls(returnUrls);
+        req.setReturn_url("https://sandbox.inst.money/status.html");
         Customer customer = new Customer();
         customer.setEmail("hello@inst.money");
         customer.setName("Jack");
@@ -105,7 +85,7 @@ public class FiatOrderTest {
     @Test
     public void queryOrderTest() throws Exception {
 
-        String requestPath = "/api/v1/checkout";
+        String requestPath = "/v1/checkout";
         String requestQueryStr = "id=20210722083735119900000205";
 
         System.out.println("------ queryOrderTest start");
