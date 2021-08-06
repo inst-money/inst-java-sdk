@@ -1,6 +1,7 @@
 package com.inst.money.openapi;
 
 
+import com.alibaba.fastjson.JSON;
 import com.inst.money.openapi.dto.Customer;
 import com.inst.money.openapi.dto.PaymentReq;
 import com.inst.money.openapi.util.HttpUtil;
@@ -9,6 +10,8 @@ import com.inst.money.openapi.util.HttpUtil;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
 
@@ -26,7 +29,6 @@ public class FiatOrderTest {
     private static final String apiKey = "59d07871c9cb4f5190ba468ea0a8b4ee";
     private static final String apiSecret = "6edadeb7-7d3e-4137-9e52-d51bdd381c2a";
     private static final String apiPassphrase = "12345678a";
-
 
 
 
@@ -50,9 +52,16 @@ public class FiatOrderTest {
         req.setReturn_url("https://sandbox.inst.money/status.html");
         Customer customer = new Customer();
         customer.setEmail("hello@inst.money");
-        customer.setName("Jack");
-
+        customer.setFirst_name("Jack");
+        customer.setLast_name("Li");
+        customer.setPhone("+12123434235");
+        customer.setCountry("USA");
+        customer.setState("A");
+        customer.setCity("B");
+        customer.setAddress("sgasgs,shfojsg,AA");
+        customer.setZipcode("24000");
         req.setCustomer(customer);
+
         HttpUtil.post(requestPath,requestQueryStr,req.toString());
     }
 
@@ -81,6 +90,15 @@ public class FiatOrderTest {
         String requestPath = "/api/v1/orders";
         String requestQueryStr = "cust_order_id=1ec7b32b-0750-4308-b882-f00d45b4f712";
         HttpUtil.get(requestPath,requestQueryStr);
+    }
+    @Test
+    public void refundTest() throws Exception {
+
+        String requestPath = "/api/v1/refund";
+        String requestQueryStr = "";
+        Map req = new HashMap<>();
+        req.put("cust_order_id","7c235b70-f0c1-487d-a4e6-02894a821aea");
+        HttpUtil.post(requestPath,requestQueryStr, JSON.toJSONString(req));
     }
     @Test
     public void queryOrderTest() throws Exception {

@@ -37,7 +37,7 @@ public class PaymentReq {
     }
 
 
-    public void setCust_order_id(String cust_orgder_id) {
+    public void setCust_order_id(String cust_order_id) {
         this.cust_order_id = cust_order_id;
     }
 
