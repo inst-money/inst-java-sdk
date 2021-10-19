@@ -29,7 +29,6 @@ public class EventTest {
         String requestPath = "/api/v1/events/test";
         String requestQueryStr = "";
         Map req = new HashMap();
-
         HttpUtil.post(requestPath,requestQueryStr,req.toString());
     }
 
