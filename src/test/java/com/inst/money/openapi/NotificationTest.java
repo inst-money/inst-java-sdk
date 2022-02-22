@@ -12,9 +12,9 @@ public class NotificationTest {
     public void notificationTest() {
         //what you receive in header
         String timeStamp = "1585810920286";
-        String signature = "01GGwidLw0UzcV0JUs3QkuHZo34jvOqtQZpavpABCLI=";
+        String signature = "y9/rsn79nMlP4EgIzVHWvt6GLvPx06dG+mDkUSLbmoA=";
         //action, params and your secret
-        String action = "kyc-status";
+        String action = "order_result";
         String secret = "40e4cdb39f764ad48b0829e675b67b90";
         String params = "{\n" +
                 "    \"action\": \"order_result\",\n" +
